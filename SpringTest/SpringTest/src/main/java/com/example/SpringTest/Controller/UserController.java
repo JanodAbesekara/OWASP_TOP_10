@@ -5,8 +5,11 @@ import com.example.SpringTest.Services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping("/api/v1")
 @RestController
+@CrossOrigin
 public class UserController {
 
     @Autowired
@@ -22,4 +25,8 @@ public class UserController {
     public String login(@RequestBody UserDTO user) {
         return userServices.verify(user);
     }
+   @GetMapping("/Getallusers")
+    public List<UserDTO> getAllUsers() {
+        
+   }
 }
