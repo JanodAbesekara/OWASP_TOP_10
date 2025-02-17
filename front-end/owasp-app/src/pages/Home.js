@@ -16,6 +16,9 @@ function Home() {
           <li>
             <Link to="/Login">Login</Link>
           </li>
+          <li>
+            <Link to="/Adminpage">GetUser</Link>
+          </li>
         </ul>
       </nav>
     </div>

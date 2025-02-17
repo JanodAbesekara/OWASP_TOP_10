@@ -25,10 +25,10 @@ public class MYuserdetailsSever implements UserDetailsService {
             throw new UsernameNotFoundException("User not found");
         }
 
-        // Ensure that the role is correctly formatted (if it’s a single role, this will be fine)
+
         return org.springframework.security.core.userdetails.User.withUsername(user.getEmail())
                 .password(user.getPassword())
-                .roles(user.getRole()) // Ensure getRole() returns a valid role
+                .roles(user.getRole())
                 .build();
     }
 }

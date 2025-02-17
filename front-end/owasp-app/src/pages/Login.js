@@ -1,20 +1,24 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const respond = await axios.post(`http://localhost:8080/api/v1/login`,{
-        email:username,
-        password:password,
+    const respond = await axios.post(`http://localhost:8080/api/v1/login`, {
+      email: username,
+      password: password,
     });
 
+    if (respond.data != null) {
+      const token = respond.data;
+      localStorage.setItem("AuthToken",(token));
+    }
     console.log(respond.data);
-
   };
 
   return (
@@ -41,6 +45,9 @@ function Login() {
         <br />
         <button type="submit">Login</button>
       </form>
+      <button>
+        <Link to="/Adminpage">UserData</Link>
+      </button>
     </div>
   );
 }
