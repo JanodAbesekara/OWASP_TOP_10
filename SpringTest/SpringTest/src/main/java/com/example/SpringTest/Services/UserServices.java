@@ -1,17 +1,16 @@
 package com.example.SpringTest.Services;
 
 import com.example.SpringTest.DTO.LoginDTO;
+import com.example.SpringTest.DTO.UpdateDTO;
 import com.example.SpringTest.DTO.UserDTO;
 import com.example.SpringTest.Models.Users;
 import com.example.SpringTest.Repo.UserRepo;
-import org.apache.catalina.User;
 import org.jetbrains.annotations.NotNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -60,5 +59,21 @@ public class UserServices {
     public void deleteUser(Long id) {
         userRepo.deleteById(id);
     }
+
+    public UserDTO updateUserByEmail(String email, UpdateDTO updateDTO) {
+        Users user = userRepo.findByEmail(email);
+
+        if(userRepo.findByEmail(email) == null){
+            return null;
+        }
+
+        user.setName(updateDTO.getName());
+        user.setRole(updateDTO.getRole());
+
+        Users updatedUser = userRepo.save(user);
+
+        return modelMapper.map(updatedUser, UserDTO.class);
+    }
+
 
 }

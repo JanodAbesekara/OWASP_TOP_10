@@ -1,6 +1,7 @@
 package com.example.SpringTest.Controller;
 
 import com.example.SpringTest.DTO.LoginDTO;
+import com.example.SpringTest.DTO.UpdateDTO;
 import com.example.SpringTest.DTO.UserDTO;
 import com.example.SpringTest.Services.JWservice;
 import com.example.SpringTest.Services.UserServices;
@@ -71,6 +72,16 @@ public class UserController {
             return ResponseEntity.status(401).body("Invalid or expired token.");
         }
     }
+    @PutMapping("/Update/{email}")
+    public ResponseEntity<?> updateUser(@PathVariable String email, @RequestBody UpdateDTO updateDTO) {
+        try {
+            UserDTO updatedUser = userServices.updateUserByEmail(email, updateDTO);
+            return ResponseEntity.ok(updatedUser);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body("User not found");
+        }
+    }
+
 }
 
 

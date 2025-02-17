@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DeleteDTO {
+public class UpdateDTO {
     private Long id;
+    private String name;
+    private String role;
 }
